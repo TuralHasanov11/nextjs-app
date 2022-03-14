@@ -5,7 +5,7 @@ export default function ArticleList({articles}) {
   return articles.map((article, index)=>(
         <h3 key={index}>
             <Link href={`/articles/${article.id}`}>
-            {article.title}    
+              {article.title}    
             </Link></h3>
     ))
 }

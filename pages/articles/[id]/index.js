@@ -36,7 +36,33 @@ export default function article({article}) {
 //     }
 // }
 
-export const getServerSideProps = async (context)=>{
+// export const getServerSideProps = async (context)=>{
+//     const res = await fetch(`${server}/api/articles/${context.params.id}`)
+//     const article = await res.json()
+
+//     return {
+//         props:{
+//             article:article
+//         }
+//     }
+// }
+
+export const getStaticPaths = async ()=> {
+    const res = await fetch(`${server}/api/articles`)
+    const data = await res.json()
+
+    return {
+        paths: data.map(item=>{
+            return {
+                params:{id:item.id.toString()}
+            }
+        }),
+
+        fallback:false
+    }
+};
+
+export const getStaticProps = async (context)=>{
     const res = await fetch(`${server}/api/articles/${context.params.id}`)
     const article = await res.json()
 
